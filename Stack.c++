@@ -1,9 +1,9 @@
 #include<iostream>
 
-#include "DynamicArray.c++"
-
 #ifndef STACK
 #define STACK
+
+#include "DynamicArray.c++"
 
 /// @brief A linear data structure to save data close together in memory as a pile, where
 /// each element is put on top of the previous one, providing the First In Last Out functionality.

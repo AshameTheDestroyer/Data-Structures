@@ -1,11 +1,11 @@
 #include<iostream>
 
+#ifndef LINKED_LIST
+#define LINKED_LIST
+
 #include "Node.c++"
 #include "List.c++"
 #include "Array.c++"
-
-#ifndef LINKED_LIST
-#define LINKED_LIST
 
 /// @brief Introduces the abstraction of the Sparse Array class to the Linked List class.
 /// @tparam T The type of the data stored within the Sparse Array.
@@ -19,7 +19,7 @@ template<typename T>
 class LinkedList
 {
 public:
-    /// @brief Makes the SparseArray class a friend with the Linked List class.
+    /// @brief Makes the Sparse Array class a friend with the Linked List class.
     friend class SparseArray<T>;
 
     /// @brief Creates a new empty Linked List.
@@ -239,9 +239,9 @@ public:
     /// @param node A pointer to the desired Node.
     /// @param headToTail Determines whether or not to search from head to tail.
     /// @return The occuring index of the Node, or -1 if unfound.
-    size_t IndexOf(Node<T>* node, const bool &headToTail = true) const
+    int IndexOf(Node<T>* node, const bool &headToTail = true) const
     {   
-        size_t index = 0;
+        int index = 0;
         for (Node<T>* currentNode = head; currentNode; currentNode = currentNode->next, index++)
         { if (currentNode == node) { return index; } }
 

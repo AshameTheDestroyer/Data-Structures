@@ -1,10 +1,10 @@
 #include<iostream>
 
-#include "DynamicArray.c++"
-#include "Array.c++"
-
 #ifndef LIST
 #define LIST
+
+#include "DynamicArray.c++"
+#include "Array.c++"
 
 /// @brief A data structure which is a dynamic array, that can be expanded up or shrunk
 /// down by adding or removing elements from it, and offers more functionalities overall.

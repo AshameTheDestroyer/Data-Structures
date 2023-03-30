@@ -1,9 +1,9 @@
 #include<iostream>
 
-#include "DynamicArray.c++"
-
 #ifndef QUEUE
 #define QUEUE
+
+#include "DynamicArray.c++"
 
 template<typename T>
 class Queue : protected DynamicArray<T>

@@ -1,10 +1,10 @@
 #include<iostream>
 
-#include "SparseNode.c++"
-#include "LinkedList.c++"
-
 #ifndef SPARSE_ARRAY
 #define SPARSE_ARRAY
+
+#include "SparseNode.c++"
+#include "LinkedList.c++"
 
 /// @brief A data structure to save incontiguous sparse data in memory.
 /// @tparam T The type of the data stored within the Sparse Array.

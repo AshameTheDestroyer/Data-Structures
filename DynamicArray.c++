@@ -1,9 +1,15 @@
 #include<iostream>
 
-#include "Array.c++"
-
 #ifndef DYNAMIC_ARRAY
 #define DYNAMIC_ARRAY
+
+#include "Array.c++"
+#include "HashTable.c++"
+
+/// @brief Introduces the abstraction of the Hash Table class to the Dynamic Array class.
+/// @tparam T The type of the data stored within the Sparse Array.
+template<typename TKey, typename TValue>
+class HashTable;
 
 /// @brief A data structure which is a basic Array, that can be expanded up or shrunk
 /// down by adding or removing elements from it.
@@ -12,6 +18,10 @@ template<typename T>
 class DynamicArray
 {
 public:
+    /// @brief Makes the Hash Table class a friend with the Dynamic Array class.
+    template<typename TKey, typename TValue>
+    friend class HashTable;
+
     /// @brief Creates a new empty Dynamic Array.
     DynamicArray()
     {
@@ -55,9 +65,6 @@ public:
     ~DynamicArray() = default;
 
 protected:
-    /// @brief The initial value of the Dynamic Array capacity modifier if unspecified by the user.
-    static const size_t INITIAL_CAPACITY = 200;
-
     /// @brief The amount of elements the Dynamic Array can maximumly hold currently.
     size_t capacity;
     /// @brief The amount of increment the Dynamic Array capacity gets each time it runs
@@ -69,9 +76,12 @@ protected:
     Array<T> array;
 
 public:
+    /// @brief The initial value of the Dynamic Array capacity modifier if unspecified by the consumer.
+    static const size_t INITIAL_CAPACITY = 200;
+
     /// @brief The amount of elements the Dynamic Array can maximumly hold currently.
     /// @return The capacity of the Dynamic Array.
-    size_t Capacity() const { return capacity; };
+    size_t Capacity() const { return capacity; }
     /// @brief The amount of increment the Dynamic Array capacity gets each time it runs
     /// out of space to store more elements.
     /// @return The capacity modifier of the Dynamic Array.
