@@ -6,7 +6,7 @@
 #include "SparseNode.c++"
 #include "LinkedList.c++"
 
-/// @brief A data structure to save incontiguous sparse data in memory.
+/// @brief A data structure to save discontiguous sparse data in memory.
 /// @tparam T The type of the data stored within the Sparse Array.
 template<typename T>
 class SparseArray

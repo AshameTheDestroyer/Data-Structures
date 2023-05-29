@@ -10,7 +10,7 @@ class Queue : protected DynamicArray<T>
 {
 public:
     /// @brief Creates a new empty Queue.
-    Queue() : DynamicArray<T>() { }
+    Queue() : DynamicArray<T>() {}
 
     /// @brief Creates a new Queue with a defined capacity, to avoid copying the
     /// data if the initial capacity is known.
@@ -27,7 +27,7 @@ public:
     Queue(const Array<T> &array, const size_t capacityModifier = DynamicArray<T>::INITIAL_CAPACITY)
         : DynamicArray<T>(array, capacityModifier) { }
 
-    /// @brief Creates a new Queue with a defined elements count and intital values.
+    /// @brief Creates a new Queue with a defined elements count and initial values.
     /// @param length The amount of elements that'll be stored within the Queue initially.
     /// @param data A pointer to an array in memory, that has some values that'll be
     /// stored within the Queue initially.
@@ -38,7 +38,8 @@ public:
 
     ~Queue() = default;
 
-    /// @brief The amount of elements the Queue can maximumly hold currently.
+public:
+    /// @brief The amount of elements the Queue can maximally hold currently.
     /// @return The capacity of the Queue.
     size_t Capacity() const { return ((DynamicArray<T>*)this)->Capacity(); };
     /// @brief The amount of increment the Queue capacity gets each time it runs

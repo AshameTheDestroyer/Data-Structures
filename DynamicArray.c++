@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 
 #ifndef DYNAMIC_ARRAY
 #define DYNAMIC_ARRAY
@@ -8,18 +8,18 @@
 
 /// @brief Introduces the abstraction of the Hash Table class to the Dynamic Array class.
 /// @tparam T The type of the data stored within the Sparse Array.
-template<typename TKey, typename TValue>
+template <typename TKey, typename TValue>
 class HashTable;
 
 /// @brief A data structure which is a basic Array, that can be expanded up or shrunk
 /// down by adding or removing elements from it.
 /// @tparam T The type of the data stored within the Dynamic Array.
-template<typename T>
+template <typename T>
 class DynamicArray
 {
 public:
     /// @brief Makes the Hash Table class a friend with the Dynamic Array class.
-    template<typename TKey, typename TValue>
+    template <typename TKey, typename TValue>
     friend class HashTable;
 
     /// @brief Creates a new empty Dynamic Array.
@@ -53,19 +53,19 @@ public:
         this->array = array.Resize(capacity);
     }
 
-    /// @brief Creates a new Dynamic Array with a defined elements count and intital values.
+    /// @brief Creates a new Dynamic Array with a defined elements count and initial values.
     /// @param length The amount of elements that'll be stored within the Dynamic Array initially.
     /// @param data A pointer to an array in memory, that has some values that'll be
     /// stored within the Dynamic Array initially.
     /// @param capacityModifier The amount of increment the Dynamic Array capacity gets each time it runs
     /// out of space to store more elements.
-    DynamicArray(const size_t &length, T* data, const size_t capacityModifier = INITIAL_CAPACITY)
-        : DynamicArray(Array<T>(length, data), capacityModifier) { }
+    DynamicArray(const size_t &length, T *data, const size_t capacityModifier = INITIAL_CAPACITY)
+        : DynamicArray(Array<T>(length, data), capacityModifier) {}
 
     ~DynamicArray() = default;
 
 protected:
-    /// @brief The amount of elements the Dynamic Array can maximumly hold currently.
+    /// @brief The amount of elements the Dynamic Array can maximally hold currently.
     size_t capacity;
     /// @brief The amount of increment the Dynamic Array capacity gets each time it runs
     /// out of space to store more elements.
@@ -79,7 +79,7 @@ public:
     /// @brief The initial value of the Dynamic Array capacity modifier if unspecified by the consumer.
     static const size_t INITIAL_CAPACITY = 200;
 
-    /// @brief The amount of elements the Dynamic Array can maximumly hold currently.
+    /// @brief The amount of elements the Dynamic Array can maximally hold currently.
     /// @return The capacity of the Dynamic Array.
     size_t Capacity() const { return capacity; }
     /// @brief The amount of increment the Dynamic Array capacity gets each time it runs
@@ -92,10 +92,10 @@ public:
 
     /// @brief The beginning of the Dynamic Array.
     /// @return A pointer to the first element in the Dynamic Array.
-    T* begin() const { return array.begin(); }
+    T *begin() const { return array.begin(); }
     /// @brief The end of the Dynamic Array.
     /// @return A pointer to the last element in the Dynamic Array.
-    T* end() const { return array.begin() + count; }
+    T *end() const { return array.begin() + count; }
 
     /// @brief Indicates whether or not the Dynamic Array has currently no elements.
     /// @return A boolean representing whether or not the Dynamic Array is empty.
@@ -116,20 +116,26 @@ public:
         ExpandArray(array.Length());
 
         for (size_t i = 0; i < array.Length(); i++)
-        { this->array[i + count - array.Length()] = T(array[i]); }
+        {
+            this->array[i + count - array.Length()] = T(array[i]);
+        }
     }
 
     /// @brief Adds a range of elements to the end of the Dynamic Array.
     /// @param length The amount of elements that'll be added to the Dynamic Array.
     /// @param data A pointer to an array in memory, that has some values that'll be added to the Dynamic Array.
-    void AddRange(const size_t &length, T* data) { AddRange(Array<T>(length, data)); }
+    void AddRange(const size_t &length, T *data) { AddRange(Array<T>(length, data)); }
 
     /// @brief Adds an element into the Dynamic Array at a specified index.
     /// @param element The value of the element that'll be inserted into the Dynamic Array.
     /// @param index The order in which the desired element will be inserted at.
     void Insert(T element, const size_t &index) noexcept(false)
     {
-        if (index == count || (!index && !count)) { Add(element); return; }
+        if (index == count || (!index && !count))
+        {
+            Add(element);
+            return;
+        }
 
         ValidateBoundaries(index);
         Shift(index);
@@ -142,22 +148,30 @@ public:
     /// @param index The order in which the desired Array will be inserted at.
     void InsertRange(const Array<T> &array, const size_t &index) noexcept(false)
     {
-        if (index == count || (!index && !count)) { AddRange(array); return; }
+        if (index == count || (!index && !count))
+        {
+            AddRange(array);
+            return;
+        }
 
         ValidateBoundaries(index);
         Shift(index, array.Length());
 
         for (size_t i = 0; i < array.Length(); i++)
-        { this->array[i + index] = T(array[i]); }
+        {
+            this->array[i + index] = T(array[i]);
+        }
     }
 
     /// @brief Adds a range of elements into the Dynamic Array at a specified index.
     /// @param length The amount of elements that'll be added to the Dynamic Array.
     /// @param data A pointer to an array in memory, that has some values that'll be added to the Dynamic Array.
     /// @param index The order in which the desired elements will be inserted at.
-    void InsertRange(const size_t &length, T* data, const size_t &index) noexcept(false)
-    { InsertRange(Array<T>(length, data), index); }
-    
+    void InsertRange(const size_t &length, T *data, const size_t &index) noexcept(false)
+    {
+        InsertRange(Array<T>(length, data), index);
+    }
+
     /// @brief Searches for an element in the Dynamic Array, and returns its first occuring index.
     /// @param element The value of the desired element.
     /// @return The first occuring index of the element, or -1 if unfound.
@@ -177,14 +191,17 @@ public:
     /// @param element The value of the desired element.
     /// @return A boolean representing whether or not the element exists within the Dynamic Array.
     bool Contains(const T &element) const { return FirstIndexOf(element) != -1; }
-    
+
     /// @brief Removes the first occurance of an element from the Dynamic Array.
     /// @param element The value of the desired element.
     /// @return A boolean representing whether or not the element has been removed.
     bool RemoveFirst(const T &element)
     {
         size_t index = FirstIndexOf(element);
-        if (index == -1) { return false; }
+        if (index == -1)
+        {
+            return false;
+        }
 
         RemoveAt(index);
         return true;
@@ -196,7 +213,10 @@ public:
     bool RemoveLast(const T &element)
     {
         size_t index = LastIndexOf(element);
-        if (index == -1) { return false; }
+        if (index == -1)
+        {
+            return false;
+        }
 
         RemoveAt(index);
         return true;
@@ -208,11 +228,16 @@ public:
     bool RemoveAll(const T &element)
     {
         Array<size_t> indices = IndicesOf(element);
-        if (!indices.Length()) { return false; }
+        if (!indices.Length())
+        {
+            return false;
+        }
 
         for (auto &&index : indices)
-        { RemoveAt(index); }
-        
+        {
+            RemoveAt(index);
+        }
+
         return true;
     }
 
@@ -229,7 +254,10 @@ public:
     /// @param count The amount of elements will be removed.
     void RemoveRange(const size_t &index, const size_t &count) noexcept(false)
     {
-        if (!this->count && !index && !count) { return; }
+        if (!this->count && !index && !count)
+        {
+            return;
+        }
 
         ValidateBoundaries(index);
         ValidateBoundaries(index + count - 1);
@@ -250,7 +278,7 @@ public:
     /// @brief Converts the Dynamic Array into an Array.
     /// @return An Array consisting of all of the Dynamic Array elements.
     Array<T> ToArray() const { return array.Resize(count); }
-    
+
     /// @brief Gets or Sets an element in the Dynamic Array.
     /// @param index The order of the desired element.
     /// @return The element.
@@ -272,12 +300,20 @@ public:
     /// @brief Adds an element to the end of the Dynamic Array.
     /// @param element The value of the element that'll be added to the Dynamic Array.
     /// @return The reference of the Dynamic Array after adding the element value to it.
-    DynamicArray<T> &operator<<(T element) { Add(element); return *this; }
-    
+    DynamicArray<T> &operator<<(T element)
+    {
+        Add(element);
+        return *this;
+    }
+
     /// @brief Adds an Array of elements to the end of the Dynamic Array.
     /// @param array The Array that'll be added to the Dynamic Array.
     /// @return The reference of the Dynamic Array after adding the Array of elements value to it.
-    DynamicArray<T> &operator<<(const Array<T> &array) { AddRange(array); return *this; }
+    DynamicArray<T> &operator<<(const Array<T> &array)
+    {
+        AddRange(array);
+        return *this;
+    }
 
 protected:
     /// @brief Checks whether or not an index is within the boundaries of the Dynamic Array, if not,
@@ -285,7 +321,10 @@ protected:
     /// @param index The selected index that'll be checked.
     void ValidateBoundaries(const size_t &index) const noexcept(false)
     {
-        if (index < count) { return; }
+        if (index < count)
+        {
+            return;
+        }
 
         throw std::out_of_range("The index [" + std::to_string(index) + "] is out of the range of the Dynamic Array.");
     }
@@ -313,7 +352,10 @@ protected:
         for (size_t i = count - steps - 1; i >= (size_t)start; i--)
         {
             array[i + steps] = array[i];
-            if (!i) { break; }
+            if (!i)
+            {
+                break;
+            }
         }
     }
 
@@ -324,7 +366,9 @@ protected:
     void Unshift(const size_t &start, const size_t &steps = 1)
     {
         for (size_t i = start + steps; i < count; i++)
-        { array[i - steps] = array[i]; }
+        {
+            array[i - steps] = array[i];
+        }
 
         count -= steps;
     }

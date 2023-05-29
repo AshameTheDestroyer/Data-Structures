@@ -23,9 +23,9 @@ std::string ToBinary(long value)
 /// @brief Converts a binary number into a decimal number.
 /// @param value The value of the given number as a string.
 /// @return A number representing the value of the specified number but in decimal.
-short ToDecimal(const std::string &value)
+long ToDecimal(const std::string &value)
 {
-    short decimalValue = 0;
+    long decimalValue = 0;
     for (size_t i = 0; i < value.size(); i++)
     { decimalValue += (value[i] - '0') * std::pow(2, value.size() - i - 1); }
     return decimalValue;

@@ -70,7 +70,7 @@ public:
     /// @brief The initial value of the Hash Table capacity modifier if unspecified by the consumer.
     static const size_t INITIAL_CAPACITY = 500;
 
-    /// @brief The amount of elements the Dynamic Array can maximumly hold currently.
+    /// @brief The amount of elements the Dynamic Array can maximally hold currently.
     /// @return The capacity of the Dynamic Array.
     size_t Capacity() const { return keys.capacity; }
     /// @brief The amount of increment the Dynamic Array capacity gets each time it runs
@@ -101,11 +101,7 @@ public:
             keyPocket->Add(key);
             valuePocket->Add(value);
             
-            // std::cout << index << ": " << value << ": ";
             hashedPairCount++;
-            // AdapteCapacity();
-            // std::cout << keys.capacity << "\n";
-
             return;
         }
 
@@ -125,11 +121,6 @@ public:
         
         LinkedList<TKey>* keyPocket = &keys.array[index];
         LinkedList<TValue>* valuePocket = &values.array[index];
-
-        // for (auto &&item : keys.array)
-        // {
-        //     std::cout << item.Count() << ", ";
-        // }
         
         auto keyNode = keyPocket->FindFirstNode(key);
         if (keyNode != nullptr)
@@ -140,6 +131,22 @@ public:
 
         throw std::out_of_range("The provided key doesn't exist within the Hash Table.");
     }
+
+    /// @brief Checks for a key within the Hash Table.
+    /// @param key The key of the pair that'll be searched for.
+    /// @return A boolean value representing whether or not the key is presented in the Hash Table.
+    bool Has(TKey &key)
+    {
+        try { Get(key); return true; } catch (...) { }
+        return false;
+    }
+
+    /// @brief Gets or Sets a value within the Hash Table using a key, without the ability
+    /// to set it, (if the key doesn't exist, it'll throw an "out of range" exception).
+    /// @param key The key of the pair that'll be used to access the value its associated with.
+    /// @return The value that's associated with the key.
+    TValue operator[](const TKey &key) const noexcept(false)
+    { return Get(key); }
     
 private:
     /// @brief Checks whether or not the threshold is between 0 and 1, if not,

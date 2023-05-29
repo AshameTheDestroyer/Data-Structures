@@ -40,7 +40,7 @@ public:
         { data[i] = T(initialValue); }
     }
 
-    /// @brief Creates a new Array with a defined length and intital values.
+    /// @brief Creates a new Array with a defined length and initial values.
     /// @param length The amount of elements that'll be stored within the Array.
     /// @param data A pointer to an array in memory, that has some values that'll be
     /// stored within the Array.

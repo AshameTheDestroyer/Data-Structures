@@ -13,7 +13,7 @@ class Stack : protected DynamicArray<T>
 {
 public:
     /// @brief Creates a new empty Stack.
-    Stack() : DynamicArray<T>() { }
+    Stack() : DynamicArray<T>() {}
 
     /// @brief Creates a new Stack with a defined capacity, to avoid copying the
     /// data if the initial capacity is known.
@@ -30,7 +30,7 @@ public:
     Stack(const Array<T> &array, const size_t capacityModifier = DynamicArray<T>::INITIAL_CAPACITY)
         : DynamicArray<T>(array, capacityModifier) { }
 
-    /// @brief Creates a new Stack with a defined elements count and intital values.
+    /// @brief Creates a new Stack with a defined elements count and initial values.
     /// @param length The amount of elements that'll be stored within the Stack initially.
     /// @param data A pointer to an array in memory, that has some values that'll be
     /// stored within the Stack initially.
@@ -42,7 +42,7 @@ public:
     ~Stack() = default;
 
 public:
-    /// @brief The amount of elements the Stack can maximumly hold currently.
+    /// @brief The amount of elements the Stack can maximally hold currently.
     /// @return The capacity of the Stack.
     size_t Capacity() const { return ((DynamicArray<T>*)this)->Capacity(); };
     /// @brief The amount of increment the Stack capacity gets each time it runs

@@ -12,7 +12,7 @@
 template<typename T>
 class SparseArray;
 
-/// @brief A data structure which is a set of incontiguous Nodes, that can be expanded up or shrunk
+/// @brief A data structure which is a set of discontiguous Nodes, that can be expanded up or shrunk
 /// down by adding or removing Nodes from it.
 /// @tparam T The type of the data stored within the Linked List.
 template<typename T>

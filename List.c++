@@ -14,7 +14,7 @@ class List : public DynamicArray<T>
 {
 public:
     /// @brief Creates a new empty List.
-    List() : DynamicArray<T>() { }
+    List() : DynamicArray<T>() {}
 
     /// @brief Creates a new List with a defined capacity, to avoid copying the
     /// data if the initial capacity is known.
@@ -31,7 +31,7 @@ public:
     List(const Array<T> &array, const size_t capacityModifier = DynamicArray<T>::INITIAL_CAPACITY)
         : DynamicArray<T>(array, capacityModifier) { }
 
-    /// @brief Creates a new List with a defined elements count and intital values.
+    /// @brief Creates a new List with a defined elements count and initial values.
     /// @param length The amount of elements that'll be stored within the List initially.
     /// @param data A pointer to an array in memory, that has some values that'll be
     /// stored within the List initially.
